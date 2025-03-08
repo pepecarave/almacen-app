@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Almacén</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Manifest para convertirlo en PWA -->
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <header>
+        <h1>Gestión de Almacén</h1>
+    </header>
+
+    <main>
+        <h2>Agregar Producto</h2>
+        <input type="text" id="nombre" placeholder="Nombre del Producto">
+        <input type="text" id="ubicacion" placeholder="Ubicación">
+        <input type="number" id="stock" placeholder="Stock">
+        <button onclick="agregarProducto()">Agregar</button>
+
+        <h2>Productos en Almacén</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Ubicación</th>
+                    <th>Stock</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="lista-productos">
+                <!-- Los productos se insertarán aquí dinámicamente -->
+            </tbody>
+        </table>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
