@@ -40,7 +40,6 @@ function agregarProducto() {
         document.getElementById("stock").value = "";
     };
 }
-
 // Función para mostrar productos en la tabla
 function mostrarProductos() {
     const transaction = db.transaction(["productos"], "readonly");
@@ -50,14 +49,14 @@ function mostrarProductos() {
     request.onsuccess = function () {
         const productos = request.result;
         let tablaHTML = "";
-        productos.forEach((p, index) => {
+        productos.forEach((p) => {
             tablaHTML += `
                 <tr>
                     <td>${p.nombre}</td>
                     <td>${p.ubicacion}</td>
                     <td>${p.stock}</td>
                     <td>
-                        <button onclick="eliminarProducto(${index})">Eliminar</button>
+                        <button onclick="eliminarProducto(${p.id})">Eliminar</button>
                     </td>
                 </tr>
             `;
@@ -66,11 +65,19 @@ function mostrarProductos() {
     };
 }
 
-// Función para eliminar un producto
-function eliminarProducto(index) {
+// Función para eliminar un producto por su ID correcto
+function eliminarProducto(id) {
     const transaction = db.transaction(["productos"], "readwrite");
     const store = transaction.objectStore("productos");
 
-    store.delete(index);
-    transaction.oncomplete = () => mostrarProductos();
+    const request = store.delete(id);
+    request.onsuccess = () => {
+        mostrarProductos();
+    };
+    request.onerror = () => {
+        console.log("Error al eliminar el producto.");
+    };
 }
+
+
+
